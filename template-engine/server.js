@@ -4,6 +4,7 @@ const fs = require('fs')
 const port = 3000
 const app = express()
 
+// ? 1. Register template enginge callback
 app.engine('madeline', (filePath, options, callback) =>
 {
     fs.readFile(filePath, (err, content) =>
@@ -22,7 +23,9 @@ app.engine('madeline', (filePath, options, callback) =>
     })
 })
 
+// ? 2. set views folder
 app.set('views', './views')
+// ? 3. set name of view engine (determines extension?)
 app.set('view engine', 'madeline')
 
 app.get('/', (req, res) =>
