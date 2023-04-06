@@ -12,10 +12,7 @@ app.get('/', (req, res) =>
     res.send(heading + link)
 })
 
-app.get('/error', (req, res) =>
-{
-    res.status(404).send('<h1>Not sure how you got here. You done goofed.</h1>')
-})
+
 
 app.get('/:number_of_bottles', (req, res) =>
 {
@@ -28,7 +25,7 @@ app.get('/:number_of_bottles', (req, res) =>
         || parsedNumBottles < 0
     )
     {
-        return res.redirect('/error')
+        return res.redirect(`/${numBottles}/error`)
     }
 
     let heading = `<h1>${parsedNumBottles} ${msg}</h1>`
@@ -50,6 +47,10 @@ app.get('/:number_of_bottles', (req, res) =>
     res.send(heading + link)
 })
 
+app.get('*', (req, res) =>
+{
+    res.status(404).send('<h1>Not sure how you got here. You done goofed.</h1>')
+})
 
 
 app.listen(PORT, () =>
