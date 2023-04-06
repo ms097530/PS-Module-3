@@ -12,11 +12,18 @@ app.use((req, res, next) =>
 })
 
 // Mount routes
+
+/**
+ * GET /
+ */
 app.get('/', (req, res) =>
 {
     res.send(plants)
 })
 
+/**
+ * GET /awesome
+ */
 app.get('/awesome', (req, res) =>
 {
     res.send(`
@@ -25,6 +32,10 @@ app.get('/awesome', (req, res) =>
   `)
 })
 
+/**
+ * GET /hello/:firstname/:lastname
+ * params: firstname, lastname
+ */
 app.get('/hello/:firstname/:lastname', (req, res) =>
 {
     const { firstname, lastname } = req.params
@@ -35,9 +46,13 @@ app.get('/howdy/:firstname', (req, res) =>
 {
     console.log(req.params)
     console.log(req.query)
-    res.send(`Hello ${req.query.title} ${req.params.firstname}`)
+    res.send(`Hello ${req.params.firstname}, ${req.query.title} of ${req.query.territory}`)
 })
 
+/**
+ * GET /:indexOfPlantArray
+ * params: indexOfPlantArray 
+*/
 app.get('/:indexOfPlantArray', (req, res) =>
 {
     console.log(req.params)
@@ -55,8 +70,13 @@ app.get('/:indexOfPlantArray', (req, res) =>
     }
 })
 
-
-
+/**
+ * GET catch all route
+ */
+app.get('*', (req, res) =>
+{
+    res.send('<h1>There\'s nothing here. You found the Limbo route!')
+})
 
 app.listen(PORT, () =>
 {
