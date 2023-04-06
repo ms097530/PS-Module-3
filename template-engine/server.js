@@ -30,7 +30,23 @@ app.set('view engine', 'madeline')
 
 app.get('/', (req, res) =>
 {
+    // first argument is name of template file
+    // second argument gets passed as "options"
     res.render('template', { title: 'Heyo', message: 'Ricky Bobby', content: 'In the house' })
+})
+
+app.get('/about', (req, res) =>
+{
+    // first argument is name of template file
+    // second argument gets passed as "options"
+    res.render('template', { title: 'IT\'S A MYSTERY', message: 'Information has a price', content: '<h3>Pay up</h3>' })
+})
+
+app.get('/another', (req, res) =>
+{
+    // first argument is name of template file
+    // second argument gets passed as "options"
+    res.render('test', { title: 'Uhh', content: 'You want more?', message: 'Go on, git' })
 })
 
 app.listen(port, () =>

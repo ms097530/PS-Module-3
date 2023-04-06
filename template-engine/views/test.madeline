@@ -1,0 +1,11 @@
+<head>
+    #title#
+</head>
+<body>
+<header>
+    #message#
+</header>
+    <h3 style="color: red;">
+        #content#
+    </h3>
+</body>
