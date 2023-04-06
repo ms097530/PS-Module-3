@@ -31,6 +31,7 @@ app.get('/fruits', (req, res) =>
     res.send(fruits)
 })
 
+// show route
 app.get('/fruits/:indexOfFruitsArray', (req, res) =>
 {
     const { indexOfFruitsArray: index } = req.params
