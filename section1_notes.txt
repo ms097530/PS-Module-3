@@ -1,0 +1,11 @@
+https://news.yahoo.com:80/videoplay?docid=-72492029040924&hl=en#00h02m30s
+  1      2      3       4       5  6          7                   8
+
+1. protocol
+2. subdomain
+3. domain name
+4. port
+5. path
+6. query
+7. parameters
+8. fragment

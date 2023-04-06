@@ -1,0 +1,14 @@
+Section 2 Notes
+
+Intro to Node
+
+- Electron to build cross-platform desktop apps with JS, HTML, and CSS
+
+- why is Node so performant?
+  - asynchronous/event-driven design enables non-blocking input-output
+  - typical Node server is capable of supporting tens of thousands of concurrent connections
+
+Asynchronous Programming Model
+- high performance, non-blocking I/O operations must be designed as asynchronous methods
+  - therefore, Node developer will use callback functions and/or promises extensively
+** try/catch should be handled within callback in Node, can not throw outside

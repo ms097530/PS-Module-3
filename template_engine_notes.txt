@@ -1,0 +1,5 @@
+Template engines
+
+- useful when using lots of static data
+- there are template engines that work with React, but they can be difficult to work with
+  - NextJS does server-side rendering like a template engine and handles React so that we get full functionality?

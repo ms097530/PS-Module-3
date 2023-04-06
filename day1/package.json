@@ -1,0 +1,17 @@
+{
+  "name": "day1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "start": "nodemon script.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Michael Schultz",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "request": "^2.88.2"
+  }
+}
