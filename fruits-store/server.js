@@ -35,7 +35,10 @@ app.get('/fruits/:indexOfFruitsArray', (req, res) =>
 {
     const { indexOfFruitsArray: index } = req.params
     const indexInt = parseInt(index)
-    const result = indexInt >= 0 && indexInt < fruits.length ? fruits[indexInt] : { input: index, message: 'Invalid input' }
+    const result = indexInt >= 0 && indexInt < fruits.length
+        ? fruits[indexInt]
+        : { input: index, message: 'Invalid input' }
+
     res.send(result)
 })
 
