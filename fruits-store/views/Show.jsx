@@ -22,7 +22,7 @@ function Show(props)
             <>
                 <h2>{props.fruit.name}</h2>
                 <p>Color: {props.fruit.color}</p>
-                <p>Ready to eat: {props.fruit.readyToEat}</p>
+                <p>Ready to eat: {props.fruit.readyToEat ? 'good to go' : 'not on your life'}</p>
             </>
         )
 
