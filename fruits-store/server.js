@@ -42,7 +42,7 @@ app.get('/fruits/:indexOfFruitsArray', (req, res) =>
         ? fruits[indexInt]
         : { input: index, message: 'Invalid input' }
 
-    res.render('Show', { test: 'ahhh', bob: 'dob' })
+    res.render('Show', { fruit: result, test: 'ahhh', bob: 'dob' })
     // res.send(result)
 })
 

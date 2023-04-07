@@ -11,17 +11,38 @@ function Show(props)
     }, [])
     console.log(props)
 
-    // const handleClick = () =>
-    // {
-    //     setCount(prevCount => prevCount + 1)
-    // }
+    const handleClick = () =>
+    {
+        setCount(prevCount => prevCount + 1)
+    }
+
+    const output = props.fruit.message
+        ? <h2>{props.fruit.message}</h2>
+        : (
+            <>
+                <h2>{props.fruit.name}</h2>
+                <p>Color: {props.fruit.color}</p>
+                <p>Ready to eat: {props.fruit.readyToEat}</p>
+            </>
+        )
 
     return (
         <div>
+
             <h1>Show Page</h1>
-            <p>{count}</p>
-            {/* <button onClick={handleClick}>+</button> */}
-            <a href="/">Go Home</a>
+
+            <div>
+                {output}
+            </div>
+
+            <div>
+                <p>{count}</p>
+                <button onClick={handleClick}>+</button>
+                <div>
+                    <a href="/">Go Home</a>
+                </div>
+            </div>
+
         </div>
     )
 }
