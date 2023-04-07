@@ -1,25 +1,9 @@
 const express = require('express')
+const fruits = require('./models/fruits')
 
 const PORT = 3000
 const app = express()
 
-const fruits = [
-    {
-        name: 'apple',
-        color: 'red',
-        readyToEat: true
-    },
-    {
-        name: 'banana',
-        color: 'yellow',
-        readyToEat: true
-    },
-    {
-        name: 'pear',
-        color: 'green',
-        readyToEat: false
-    }
-]
 
 /**
  * *  URL               HTTP Verb   Action      Used For
