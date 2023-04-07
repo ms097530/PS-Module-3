@@ -59,7 +59,7 @@ app.post('/fruits', async (req, res) =>
     console.log(req.body)
 
     if (req.body.readyToEat === 'on')
-    // value from checkbox will be 'on' or 'off'
+    // value from checkbox will be 'on' or won't send any value
     // we only care about true or false, so set data accordingly and add to fruits
     {
         req.body.readyToEat = true
