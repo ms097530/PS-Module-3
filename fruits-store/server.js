@@ -32,6 +32,12 @@ app.get('/fruits', (req, res) =>
     res.render('Index', { fruits })
 })
 
+// new route
+app.get('/fruits/new', (req, res) =>
+{
+    res.render('New')
+})
+
 // show route
 app.get('/fruits/:indexOfFruitsArray', (req, res) =>
 {
@@ -46,6 +52,8 @@ app.get('/fruits/:indexOfFruitsArray', (req, res) =>
     res.render('Show', { fruit: result, test: 'ahhh', bob: 'dob' })
     // res.send(result)
 })
+
+
 
 // fallback route
 app.get('*', (req, res) =>
