@@ -15,10 +15,9 @@ function Index({ fruits })
                             <div>
                                 <h2>
                                     <a href={`/fruits/${i}`}>
-                                        {fruit.name}
+                                        Check out {fruit.name}
                                     </a>
                                 </h2>
-                                <p>Color: {fruit.color}</p>
                             </div>
                             <hr />
                         </React.Fragment>

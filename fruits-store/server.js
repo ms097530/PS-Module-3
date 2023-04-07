@@ -10,7 +10,6 @@ app.set('view engine', 'jsx')
 app.engine('jsx', require('jsx-view-engine').createEngine())
 
 
-
 /**
  * *  URL               HTTP Verb   Action      Used For
  *    /fruits           GET         index       display list of all photos
@@ -38,14 +37,17 @@ app.get('/fruits/:indexOfFruitsArray', (req, res) =>
 {
     const { indexOfFruitsArray: index } = req.params
     const indexInt = parseInt(index)
+    // figure out if parameter actually maps to something
     const result = indexInt >= 0 && indexInt < fruits.length
         ? fruits[indexInt]
         : { input: index, message: 'Invalid input' }
 
+    // pass props via options object
     res.render('Show', { fruit: result, test: 'ahhh', bob: 'dob' })
     // res.send(result)
 })
 
+// fallback route
 app.get('*', (req, res) =>
 {
     res.status(404).send('<h1>Not sure how you got here. Go on, git!</h1>')
