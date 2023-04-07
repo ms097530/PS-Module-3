@@ -1,1 +1,6 @@
-<h1>A specific pokemon</h1>
+<% if (result.error) { %>
+<h1><%= result.message %></h1>
+<% } else { %>
+<h1><%= result.data.name %></h1>
+<p>Id: <%= result.data.id %></p>
+<% } %>

@@ -38,7 +38,12 @@ app.get('/digimon/new', (req, res) =>
 
 app.get('/digimon/:id', (req, res) =>
 {
-    res.render('./digimon/show')
+    const { id } = req.params
+    const parsedId = parseInt(id)
+
+    const result = parsedId >= 0 && parsedId < digimon.length ? { error: false, data: digimon[parsedId - 1] } : { error: true, message: 'Invalid input' }
+
+    res.render('./digimon/show', { result })
 })
 
 app.post('/digimon', (req, res) =>
@@ -61,7 +66,11 @@ app.get('/pokemon/new', (req, res) =>
 
 app.get('/pokemon/:id', (req, res) =>
 {
-    res.render('./pokemon/show')
+    const { id } = req.params
+    const parsedId = parseInt(id)
+    const result = parsedId >= 0 && parsedId < pokemon.length ? { error: false, data: pokemon[parsedId - 1] } : { error: true, message: 'Invalid input' }
+
+    res.render('./pokemon/show', { result })
 })
 
 app.post('/pokemon', (req, res) =>
