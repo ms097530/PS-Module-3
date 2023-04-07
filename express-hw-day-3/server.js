@@ -1,5 +1,6 @@
 const express = require('express')
-const ejs = require('ejs')
+const digimon = require('./models/digimon')
+const pokemon = require('./models/pokemon')
 
 const PORT = 3000
 const app = express()
@@ -27,7 +28,7 @@ app.get('/', (req, res) =>
 
 app.get('/digimon', (req, res) =>
 {
-    res.render('./digimon/index')
+    res.render('./digimon/index', { digimon })
 })
 
 app.get('/digimon/new', (req, res) =>
@@ -50,7 +51,7 @@ app.post('/digimon', (req, res) =>
 
 app.get('/pokemon', (req, res) =>
 {
-    res.render('./pokemon/index')
+    res.render('./pokemon/index', { pokemon })
 })
 
 app.get('/pokemon/new', (req, res) =>

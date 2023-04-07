@@ -1,1 +1,13 @@
-<h1>Pokemon root</h1>
+<h1>POKEMON</h1>
+<ul>
+    <% for (let mon of pokemon) { %>
+    <li>
+        <a href="/pokemon/<%= mon.id %>">
+            <%= mon.name %>
+        </a>
+    </li>
+    <% } %>
+</ul>
+<div>
+    <a href="/">Go home</a>
+</div>
