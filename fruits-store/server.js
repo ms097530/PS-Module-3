@@ -1,8 +1,14 @@
 const express = require('express')
 const fruits = require('./models/fruits')
+// const Show = require('./views/Show.jsx')
 
 const PORT = 3000
 const app = express()
+
+app.set('views', 'views')
+app.set('view engine', 'jsx')
+app.engine('jsx', require('jsx-view-engine').createEngine())
+
 
 
 /**
@@ -36,7 +42,8 @@ app.get('/fruits/:indexOfFruitsArray', (req, res) =>
         ? fruits[indexInt]
         : { input: index, message: 'Invalid input' }
 
-    res.send(result)
+    res.render('Show', { test: 'ahhh', bob: 'dob' })
+    // res.send(result)
 })
 
 app.get('*', (req, res) =>
