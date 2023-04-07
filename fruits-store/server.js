@@ -21,11 +21,23 @@ const fruits = [
     }
 ]
 
+/**
+ * *  URL               HTTP Verb   Action      Used For
+ *    /fruits           GET         index       display list of all photos
+ *    /fruits/new       GET         new         display form for creating new fruit
+ *    /fruits           POST        create      create new fruit
+ *    /fruits/:id       GET         show        display specific fruit
+ *    /fruits/:id/edit  GET         edit        display form for editing fruit
+ *    /fruits/:id       PATCH/PUT   update      update a specific fruit
+ *    /fruits/:id       DELETE      destroy     delete a specific fruit
+ */
+
 app.get('/', (req, res) =>
 {
     res.send('<h1>Fruits Store</h1>')
 })
 
+// index route
 app.get('/fruits', (req, res) =>
 {
     res.send(fruits)
