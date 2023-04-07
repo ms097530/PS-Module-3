@@ -7,13 +7,17 @@ function Index({ fruits })
             <h1>Fruits</h1>
             <hr />
             {
-                fruits.map(fruit =>
+                fruits.map((fruit, i) =>
                 {
                     return (
                         <React.Fragment key={fruit.name
                         }>
                             <div>
-                                <h2>{fruit.name}</h2>
+                                <h2>
+                                    <a href={`/fruits/${i}`}>
+                                        {fruit.name}
+                                    </a>
+                                </h2>
                                 <p>Color: {fruit.color}</p>
                             </div>
                             <hr />

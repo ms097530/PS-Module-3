@@ -39,6 +39,11 @@ function Show(props)
                 <p>{count}</p>
                 <button onClick={handleClick}>+</button>
                 <div>
+                    <a href="/fruits">
+                        Back to fruits
+                    </a>
+                </div>
+                <div>
                     <a href="/">Go Home</a>
                 </div>
             </div>
