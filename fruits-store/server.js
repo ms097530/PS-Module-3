@@ -1,6 +1,6 @@
 const express = require('express')
 const fruits = require('./models/fruits')
-// const Show = require('./views/Show.jsx')
+const fs = require('fs')
 
 const PORT = 3000
 const app = express()
@@ -9,6 +9,13 @@ app.set('views', 'views')
 app.set('view engine', 'jsx')
 app.engine('jsx', require('jsx-view-engine').createEngine())
 
+app.use((req, res, next) =>
+{
+    console.log('I run for all routes')
+    next()
+})
+
+app.use(express.urlencoded({ extended: false }))
 
 /**
  * *  URL               HTTP Verb   Action      Used For
@@ -26,19 +33,49 @@ app.get('/', (req, res) =>
     res.send('<h1>Fruits Store</h1>')
 })
 
-// index route
+/**
+ * Index Route: return a list of fruits
+ */
 app.get('/fruits', (req, res) =>
 {
     res.render('Index', { fruits })
 })
 
-// new route
+/**
+ * New Route: return form to create new fruit
+ */
 app.get('/fruits/new', (req, res) =>
 {
     res.render('New')
 })
 
-// show route
+/**
+ * Create Route: add new fruit to data 
+*/
+app.post('/fruits', async (req, res) =>
+{
+    // let fruitsData = await fs.promises.readFile('./models/fruits.js')
+
+    console.log(req.body)
+
+    if (req.body.readyToEat === 'on')
+    // value from checkbox will be 'on' or 'off'
+    // we only care about true or false, so set data accordingly and add to fruits
+    {
+        req.body.readyToEat = true
+    }
+    else
+    {
+        req.body.readyToEat = false
+    }
+    console.log(req.body)
+    fruits.push(req.body)
+    res.redirect('/fruits')
+})
+
+/**
+ * Show Route: returns a single fruit
+*/
 app.get('/fruits/:indexOfFruitsArray', (req, res) =>
 {
     const { indexOfFruitsArray: index } = req.params
@@ -52,8 +89,6 @@ app.get('/fruits/:indexOfFruitsArray', (req, res) =>
     res.render('Show', { fruit: result, test: 'ahhh', bob: 'dob' })
     // res.send(result)
 })
-
-
 
 // fallback route
 app.get('*', (req, res) =>
