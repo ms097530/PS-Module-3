@@ -7,6 +7,8 @@ const app = express()
 
 app.set('view engine', 'ejs')
 
+app.use(express.urlencoded({ extended: false }))
+
 // * ==== ROUTES ====
 // ? General
 // GET: /, *
@@ -48,7 +50,10 @@ app.get('/digimon/:id', (req, res) =>
 
 app.post('/digimon', (req, res) =>
 {
-    console.log('add a new digimon...')
+    console.log('adding a new digimon...')
+    const prevId = digimon[digimon.length - 1].id
+    const newDigimon = { id: prevId + 1, name: req.body.name }
+    digimon.push(newDigimon)
     res.redirect('/digimon')
 })
 
@@ -76,6 +81,9 @@ app.get('/pokemon/:id', (req, res) =>
 app.post('/pokemon', (req, res) =>
 {
     console.log('adding a new pokemon...')
+    const prevId = pokemon[pokemon.length - 1].id
+    const newPokemon = { id: prevId + 1, name: req.body.name }
+    pokemon.push(newPokemon)
     res.redirect('/pokemon')
 })
 
