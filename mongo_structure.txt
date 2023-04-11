@@ -1,0 +1,28 @@
+Project name: sei-fruits
+Cluster: Fruits-1
+Database: fruits
+Collections: fruits, vegetables
+Documents: 
+in fruits... { name: 'apple', color: 'red', readyToEat: true }
+in vegetables... { name: 'corn', color: 'yellow', readyToEat: true }
+
+- "fruits" we added in connection URI refers to database we want to connect to
+  - not necessary but was helpful in this case
+- "Fruit" model created a "fruits" collection in our "fruits" database
+  - likewise, a "Vegetable" model would create a "vegetables" collection in our "fruits" database
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
