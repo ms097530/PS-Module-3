@@ -1,13 +1,17 @@
+require('dotenv').config()
 const express = require('express')
 const fruits = require('./models/fruits')
 const fs = require('fs')
 
 const PORT = 3000
+const mongoURI = process.env.MONGO_URI
 const app = express()
 
 app.set('views', 'views')
 app.set('view engine', 'jsx')
 app.engine('jsx', require('jsx-view-engine').createEngine())
+
+
 
 app.use((req, res, next) =>
 {
