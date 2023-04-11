@@ -14,11 +14,11 @@ function Index({ fruits })
                     fruits.map((fruit, i) =>
                     {
                         return (
-                            <React.Fragment key={fruit.name
+                            <React.Fragment key={fruit._id
                             }>
                                 <div>
                                     <h2>
-                                        <a href={`/fruits/${i}`}>
+                                        <a href={`/fruits/${fruit._id}`}>
                                             Check out {fruit.name}
                                         </a>
                                     </h2>

@@ -9,7 +9,7 @@ function Show(props)
     {
         console.log('USE EFFECT')
     }, [])
-    console.log(props)
+    // console.log(props)
 
     const handleClick = () =>
     {

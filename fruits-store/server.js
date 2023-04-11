@@ -14,10 +14,6 @@ app.set('views', 'views')
 app.set('view engine', 'jsx')
 app.engine('jsx', require('jsx-view-engine').createEngine())
 
-
-
-
-
 app.use(express.urlencoded({ extended: false }))
 
 app.use((req, res, next) =>
@@ -47,7 +43,15 @@ app.get('/', (req, res) =>
  */
 app.get('/fruits', (req, res) =>
 {
-    res.render('fruits/Index', { fruits })
+    // * Can use "find" method multiple ways
+    // Fruit.find({}, (error, allFruits) =>
+    // {
+    //     res.render('fruits/Index', { fruits: allFruits })
+    // })
+    Fruit.find({}).then(val =>
+    {
+        res.render('fruits/Index', { fruits: val })
+    })
 })
 
 /**
@@ -63,10 +67,6 @@ app.get('/fruits/new', (req, res) =>
 */
 app.post('fruits', async (req, res) =>
 {
-    // let fruitsData = await fs.promises.readFile('./models/fruits.js')
-
-    console.log(req.body)
-
     if (req.body.readyToEat === 'on')
     // value from checkbox will be 'on' or won't send any value
     // we only care about true or false, so set data accordingly and add to fruits
@@ -77,31 +77,24 @@ app.post('fruits', async (req, res) =>
     {
         req.body.readyToEat = false
     }
-    // console.log(req.body)
-    // fruits.push(req.body)
 
     Fruit.create(req.body, (err, createdFruit) =>
     {
-        res.send(createdFruit)
-        // res.redirect('/fruits')
+        res.redirect('/fruits')
     })
 })
 
 /**
  * Show Route: returns a single fruit
 */
-app.get('/fruits/:indexOfFruitsArray', (req, res) =>
+app.get('/fruits/:id', (req, res) =>
 {
-    const { indexOfFruitsArray: index } = req.params
-    const indexInt = parseInt(index)
-    // figure out if parameter actually maps to something
-    const result = indexInt >= 0 && indexInt < fruits.length
-        ? fruits[indexInt]
-        : { input: index, message: 'Invalid input' }
+    const { id } = req.params
 
-    // pass props via options object
-    res.render('fruits/Show', { fruit: result, test: 'ahhh', bob: 'dob' })
-    // res.send(result)
+    Fruit.findById(id, (err, foundFruit) =>
+    {
+        res.render('fruits/Show', { fruit: foundFruit })
+    })
 })
 
 // fallback route
