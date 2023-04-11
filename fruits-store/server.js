@@ -1,25 +1,30 @@
 require('dotenv').config()
 const express = require('express')
+const mongoose = require('mongoose')
+// Data
 const fruits = require('./models/fruits')
-const fs = require('fs')
+const Fruit = require('./models/Fruit')
 
 const PORT = 3000
 const mongoURI = process.env.MONGO_URI
 const app = express()
 
+// configure view engine
 app.set('views', 'views')
 app.set('view engine', 'jsx')
 app.engine('jsx', require('jsx-view-engine').createEngine())
 
 
 
+
+
+app.use(express.urlencoded({ extended: false }))
+
 app.use((req, res, next) =>
 {
     console.log('I run for all routes')
     next()
 })
-
-app.use(express.urlencoded({ extended: false }))
 
 /**
  * *  URL               HTTP Verb   Action      Used For
@@ -34,7 +39,7 @@ app.use(express.urlencoded({ extended: false }))
 
 app.get('/', (req, res) =>
 {
-    res.send('<h1>Fruits Store</h1>')
+    res.send('<h1>Fruits Store</h1><a href="/fruits">To Store</a>')
 })
 
 /**
@@ -42,7 +47,7 @@ app.get('/', (req, res) =>
  */
 app.get('/fruits', (req, res) =>
 {
-    res.render('Index', { fruits })
+    res.render('fruits/Index', { fruits })
 })
 
 /**
@@ -50,13 +55,13 @@ app.get('/fruits', (req, res) =>
  */
 app.get('/fruits/new', (req, res) =>
 {
-    res.render('New')
+    res.render('/fruits/New')
 })
 
 /**
  * Create Route: add new fruit to data 
 */
-app.post('/fruits', async (req, res) =>
+app.post('fruits', async (req, res) =>
 {
     // let fruitsData = await fs.promises.readFile('./models/fruits.js')
 
@@ -72,9 +77,14 @@ app.post('/fruits', async (req, res) =>
     {
         req.body.readyToEat = false
     }
-    console.log(req.body)
-    fruits.push(req.body)
-    res.redirect('/fruits')
+    // console.log(req.body)
+    // fruits.push(req.body)
+
+    Fruit.create(req.body, (err, createdFruit) =>
+    {
+        res.send(createdFruit)
+        // res.redirect('/fruits')
+    })
 })
 
 /**
@@ -90,7 +100,7 @@ app.get('/fruits/:indexOfFruitsArray', (req, res) =>
         : { input: index, message: 'Invalid input' }
 
     // pass props via options object
-    res.render('Show', { fruit: result, test: 'ahhh', bob: 'dob' })
+    res.render('fruits/Show', { fruit: result, test: 'ahhh', bob: 'dob' })
     // res.send(result)
 })
 
@@ -102,5 +112,19 @@ app.get('*', (req, res) =>
 
 app.listen(PORT, () =>
 {
+    // suppress version 7 warning message
+    mongoose.set('strictQuery', false)
+    // connect to MongoDB
+    mongoose.connect(mongoURI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    })
+
+    // run when connection successful
+    mongoose.connection.once('open', () =>
+    {
+        console.log('Connected to Mongo')
+    })
+
     console.log(`Listening on port ${PORT}`)
 })
