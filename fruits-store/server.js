@@ -44,14 +44,14 @@ app.get('/', (req, res) =>
 app.get('/fruits', (req, res) =>
 {
     // * Can use "find" method multiple ways
-    // Fruit.find({}, (error, allFruits) =>
-    // {
-    //     res.render('fruits/Index', { fruits: allFruits })
-    // })
-    Fruit.find({}).then(val =>
+    Fruit.find((error, allFruits) =>
     {
-        res.render('fruits/Index', { fruits: val })
+        res.render('fruits/Index', { fruits: allFruits })
     })
+    // Fruit.find({}).then(val =>
+    // {
+    //     res.render('fruits/Index', { fruits: val })
+    // })
 })
 
 /**
