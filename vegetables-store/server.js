@@ -33,7 +33,64 @@ app.get('/', (req, res) =>
 
 app.get('/vegetables', (req, res) =>
 {
-    res.render('vegetables/Index', { vegetables: [] })
+    Vegetable.find((err, foundVegs) =>
+    {
+        if (err || !foundVegs)
+        {
+            return res.redirect('/404?error=notfound')
+        }
+        res.render('vegetables/Index', { vegetables: foundVegs })
+    })
+})
+
+app.get('/vegetables/new', (req, res) =>
+{
+    res.render('vegetables/New')
+})
+
+app.get('/vegetables/:id', (req, res) =>
+{
+    const { id } = req.params
+    Vegetable.findById(id, (err, foundVeg) =>
+    {
+        if (err || !foundVeg)
+        {
+            return res.redirect('/404?error=notfound')
+        }
+        res.render('vegetables/Show', { vegetable: foundVeg })
+    })
+})
+
+app.post('/vegetables', (req, res) =>
+{
+    // create new vegetable via mongoose and redirect to Index
+    console.log(req.body)
+    const { readyToEat } = req.body
+
+    if (readyToEat === 'on')
+    {
+        req.body.readyToEat = true
+    }
+    else
+    {
+        req.body.readyToEat = false
+    }
+
+    Vegetable.create(req.body, (err, createdVeg) =>
+    {
+        if (err)
+        {
+            return res.redirect('/404?error=failed')
+        }
+        res.redirect('/vegetables')
+    })
+
+})
+
+app.get('*', (req, res) =>
+{
+    console.log(req.query)
+    res.status(404).render('404', req.query)
 })
 
 app.listen(PORT, () =>

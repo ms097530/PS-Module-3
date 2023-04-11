@@ -5,7 +5,7 @@ export default function Index({ vegetables })
     const result = vegetables.length > 0 ? <ul>
         {
             vegetables.map(veg => (
-                <li>
+                <li key={veg._id}>
                     <a href={`/vegetables/${veg._id}`}>{veg.name}</a>
                 </li>
             ))
@@ -14,6 +14,9 @@ export default function Index({ vegetables })
 
     return (
         <div>
+            <nav>
+                <a href="/vegetables/new">Create New Vegetable</a>
+            </nav>
             <h1>Look at all these veggies!</h1>
             <div>
                 {result}
