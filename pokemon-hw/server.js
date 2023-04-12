@@ -23,6 +23,7 @@ app.get('/pokemon', (req, res) =>
     {
         if (err || !foundPokemon)
         {
+            console.log(err)
             return res.redirect('/404?error=notfound')
         }
         return res.render('pokemon/Index', { pokemon: foundPokemon })
@@ -56,6 +57,7 @@ app.get('/pokemon/:id', (req, res) =>
     {
         if (err || !foundPokemon)
         {
+            console.log(err)
             return res.redirect('/404?error=notfound')
         }
         return res.render('pokemon/Show', { pokemon: foundPokemon })
@@ -64,7 +66,7 @@ app.get('/pokemon/:id', (req, res) =>
 
 app.get('*', (req, res) =>
 {
-    const { error } = req.params
+    const { error } = req.query
     res.render('404', { error })
 })
 

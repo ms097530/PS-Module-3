@@ -9,7 +9,6 @@ const ERRORS = [
 
 export default function NotFound({ error })
 {
-
     let errorMsg
 
     switch (error)
@@ -24,6 +23,9 @@ export default function NotFound({ error })
         <div>
             <h1>You wound up here for some weird reason</h1>
             <h2>Apparently... {errorMsg}</h2>
+            <div>
+                <a href="/pokemon">Go Home</a>
+            </div>
         </div>
     )
 }
