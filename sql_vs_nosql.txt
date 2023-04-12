@@ -1,0 +1,15 @@
+SQL vs NoSQL
+
+- relational DBs (SQL)
+  - more strictly structured
+  - famous for banking apps
+  - vertical scalability
+
+
+- NoSQL DBs
+  - more flexible
+  - social media, caching apps
+  - horizontal scalability
+
+
+- Large apps may mix different kinds of DBs
