@@ -21,8 +21,11 @@ app.get('/pokemon', (req, res) =>
 {
     Pokemon.find((err, foundPokemon) =>
     {
-
-        res.render('pokemon/Index', { pokemon: foundPokemon })
+        if (err || !foundPokemon)
+        {
+            return res.redirect('/404?error=notfound')
+        }
+        return res.render('pokemon/Index', { pokemon: foundPokemon })
     })
 })
 
@@ -38,11 +41,12 @@ app.post('/pokemon', (req, res) =>
     const pokemon = { pokedexId, name, types }
     Pokemon.create(pokemon, (err, createdPokemon) =>
     {
-        if (err)
+        if (err || !createdPokemon)
         {
             console.log(err)
+            return res.redirect('/404?error=failed')
         }
-        res.redirect('/pokemon')
+        return res.redirect('/pokemon')
     })
 })
 
@@ -52,9 +56,9 @@ app.get('/pokemon/:id', (req, res) =>
     {
         if (err || !foundPokemon)
         {
-            res.redirect('/404?error=notfound')
+            return res.redirect('/404?error=notfound')
         }
-        res.render('pokemon/Show', { pokemon: foundPokemon })
+        return res.render('pokemon/Show', { pokemon: foundPokemon })
     })
 })
 
