@@ -6,6 +6,7 @@ const tweetSchema = new mongoose.Schema(
         body: {
             type: String,
             required: true,
+            minLength: 1,
             maxLength: 255
         },
         author: String,

@@ -12,7 +12,14 @@ module.exports = function ()
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
+
+    //  to test 'close' event
+    // setTimeout(() =>
+    // {
+    //     db.close();
+    // }, 5000);
+
     db.on('open', () => console.log('Connected to MongoDB'))
-    db.on('error', (err) => console.error(err))
+    db.on('error', (err) => console.error('AHHHH ERROR', err))
     db.on('close', () => console.log('Disconnected from Mongo'))
 }
