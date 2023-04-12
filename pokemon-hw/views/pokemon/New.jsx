@@ -7,11 +7,11 @@ export default function New()
             <h1>Create new Pokemon entry</h1>
             <form action="/pokemon" method="post">
                 <label htmlFor="dexId">Pokedex ID:</label>
-                <input type="number" min="1" name="dexId" />
+                <input type="number" min="1" name="dexId" required />
                 <label htmlFor="name">Name:</label>
-                <input type="text" name="name" />
+                <input type="text" name="name" required />
                 <label htmlFor="types">Types:</label>
-                <select name="types" multiple>
+                <select name="types" multiple required>
                     <option value="fire">Fire</option>
                     <option value="water">Water</option>
                     <option value="grass">Grass</option>
