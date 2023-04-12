@@ -13,3 +13,28 @@ SQL vs NoSQL
 
 
 - Large apps may mix different kinds of DBs
+
+
+- Database Implementation
+  - SQL
+    - table for each data entity
+    - related data is JOINED together using SQL queries
+  - NoSQL
+    - might not be a collection for every data entity
+    - no requirement to break different ENTITY TYPES into separate collections
+    - some entities are better off being EMBEDDED with its parent document instead
+      - i.e. comments make sense to be embedded rather than needing a separate query to retrieve
+
+
+- Data Modeling in MongoDB
+  - embedding - "subdocuments" are contained inside of its document
+  - referencing - storing ID of related documents
+
+  - embedding data can be more efficient than referencing data because it takes extra queries to fetch referenced data
+  - "populate" method can be used to automatically retrieve reference data
+
+  - why reference at all?
+    - size limits (not generally an issue)
+    - if data changes often, you will need to update parents who have the data embedded, rather than updating it in one place
+    - what you want to do with the data matters
+      - if you want to view all posts on landing page, regardless of who posted them, it would be much easier to grab them from a Posts collection than to get them from each user
