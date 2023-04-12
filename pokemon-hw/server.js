@@ -44,14 +44,25 @@ app.post('/pokemon', (req, res) =>
         }
         res.redirect('/pokemon')
     })
-    // res.redirect('/pokemon')
 })
 
 app.get('/pokemon/:id', (req, res) =>
 {
-    res.render('pokemon/Show', { pokemon: {} })
+    Pokemon.findById(req.params.id, (err, foundPokemon) =>
+    {
+        if (err || !foundPokemon)
+        {
+            res.redirect('/404?error=notfound')
+        }
+        res.render('pokemon/Show', { pokemon: foundPokemon })
+    })
 })
 
+app.get('*', (req, res) =>
+{
+    const { error } = req.params
+    res.render('404', { error })
+})
 
 app.listen(PORT, () =>
 {
