@@ -25,7 +25,15 @@ app.get('/', (req, res) =>
 
 app.get('/flights', (req, res) =>
 {
-    res.render('flights/user/Index')
+    Flight.find()
+        .then((flights) =>
+        {
+            res.render('flights/user/Index', { flights: { data: flights, error: false } })
+        })
+        .catch((err) =>
+        {
+            res.render('flights/user/Index', { flights: { data: [], error: true } })
+        })
 })
 
 app.get('/flights/new', (req, res) =>
@@ -35,7 +43,11 @@ app.get('/flights/new', (req, res) =>
 
 app.post('/flights', (req, res) =>
 {
-    console.log(req.body)
+    if (req.body.departs)
+    {
+        req.body.departs = new Date(req.body.departs)
+    }
+
     Flight.create(req.body)
         .then((flight) =>
         {
