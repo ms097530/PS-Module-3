@@ -35,7 +35,13 @@ app.get('/flights/new', (req, res) =>
 
 app.post('/flights', (req, res) =>
 {
-    res.redirect('/flights')
+    console.log(req.body)
+    Flight.create(req.body)
+        .then((flight) =>
+        {
+            console.log(flight)
+            return res.redirect('/flights')
+        })
 })
 
 app.get('*', (req, res) =>

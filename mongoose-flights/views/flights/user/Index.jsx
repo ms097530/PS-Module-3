@@ -4,6 +4,9 @@ export default function Index({ flights })
 {
     return (
         <div>
+            <nav>
+                <a href="/flights/new">Book new flight</a>
+            </nav>
             <h1>Flights</h1>
             {
                 flights ?
