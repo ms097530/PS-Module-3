@@ -203,9 +203,12 @@ app.get('/tweets/advanced', (req, res) =>
     // * using advanced query
     // ? -_id excludes _id field
     // ? instructors suggested "-" sorts in descending order, but _id does not show up in returned data
-    Tweet.find({ likes: { $gte: 20 } }, 'title -_id')
+    // ? "-" seems to filter out data that is automatically returned otherwise
+    // * can pass string to sort or object
+    Tweet.find({ likes: { $gte: 20 } }, 'title likes sponsored -_id')
         .limit(2)
         .sort('title')
+        // .sort({ title: -1 })
         .exec()
         .then((tweets) => res.send(tweets))
         .catch((err) => res.send(err))
