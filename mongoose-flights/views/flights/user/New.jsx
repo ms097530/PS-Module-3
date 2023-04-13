@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function New()
+export default function New({ now })
 {
     return (
         <div>
@@ -20,7 +20,7 @@ export default function New()
                 </div>
                 <div>
                     <label htmlFor="departs">Date:</label>
-                    <input type="datetime-local" name="departs" />
+                    <input type="datetime-local" name="departs" min={now} />
                 </div>
 
                 <input type="submit" value="Add Flight" />

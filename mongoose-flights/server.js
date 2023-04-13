@@ -38,7 +38,7 @@ app.get('/flights', (req, res) =>
 
 app.get('/flights/new', (req, res) =>
 {
-    res.render('flights/user/New')
+    res.render('flights/user/New', { now: new Date().toISOString().slice(0, 16) })
 })
 
 app.post('/flights', (req, res) =>
