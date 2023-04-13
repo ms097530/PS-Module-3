@@ -5,20 +5,23 @@ const flightSchema = new mongoose.Schema({
     airline:
     {
         type: String,
-        enum: ['American', 'Southwest', 'United']
+        enum: ['American', 'Southwest', 'United'],
+        required: true
     },
     flightNo:
     {
         type: Number,
         min: 10,
-        max: 9999
+        max: 9999,
+        required: true
     },
     departs:
     {
         type: Date,
         // * set to function definition, not call
         // ? otherwise default will be a year from when the server started up
-        default: getYearFromNow
+        default: getYearFromNow,
+        required: true
     }
 })
 

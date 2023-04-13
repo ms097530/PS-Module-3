@@ -33,6 +33,11 @@ app.get('/flights/new', (req, res) =>
     res.render('flights/user/New')
 })
 
+app.post('/flights', (req, res) =>
+{
+    res.redirect('/flights')
+})
+
 app.get('*', (req, res) =>
 {
     res.render('404')
