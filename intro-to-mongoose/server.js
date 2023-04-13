@@ -170,6 +170,7 @@ app.get('/tweets/updateone/:title', (req, res) =>
     // * find tweet by title and update based on query params
     // * passing query param that doesn't exist doesn't throw an error
     // ! passing an invalid value for an existing key of model will throw an error
+    // ? setting new to true in third argument means updated document is returned in callback
     Tweet.findOneAndUpdate({ title: req.params.title }, { ...req.query }, { new: true })
         .then((tweet) => res.send(tweet))
         .catch((err) => res.send(err))
