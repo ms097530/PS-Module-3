@@ -11,6 +11,14 @@ export default function New()
                     <input type="number" name="flightNo" min="10" max="999" />
                 </div>
                 <div>
+                    <label htmlFor="airline">Airline:</label>
+                    <select name="airline">
+                        <option value="American" >American</option>
+                        <option value="Southwest" >Southwest</option>
+                        <option value="United" >United</option>
+                    </select>
+                </div>
+                <div>
                     <label htmlFor="date">Date:</label>
                     <input type="datetime-local" name="date" />
                 </div>
