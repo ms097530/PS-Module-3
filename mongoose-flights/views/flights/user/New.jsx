@@ -19,8 +19,8 @@ export default function New()
                     </select>
                 </div>
                 <div>
-                    <label htmlFor="date">Date:</label>
-                    <input type="datetime-local" name="date" />
+                    <label htmlFor="departs">Date:</label>
+                    <input type="datetime-local" name="departs" />
                 </div>
 
                 <input type="submit" value="Add Flight" />
