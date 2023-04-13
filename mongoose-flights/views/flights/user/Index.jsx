@@ -2,8 +2,12 @@ import React from 'react'
 
 export default function Index({ flights })
 {
-    console.log(flights)
+    // console.log(flights)
 
+    // toISOString converts to string with 0 UTC offset
+    console.log(flights.data[0].departs.toISOString())
+
+    // toString on Date converts based on local time
     const result = flights.data ?
         flights.data.map((flight) =>
             <div key={flight._id}>
