@@ -28,6 +28,13 @@ app.get('/tweets/insertone', (req, res) =>
         .catch((err) => res.send(err))
 })
 
+app.get('/tweets/insertone/custom', (req, res) =>
+{
+    Tweet.create({ ...req.query })
+        .then((tweet) => res.send(tweet))
+        .catch((err) => res.send(err))
+})
+
 
 app.get('/tweets/insertmany', (req, res) =>
 {
@@ -179,11 +186,13 @@ app.get('/tweets/updateone/:title', (req, res) =>
 
 // * ========== Intermediate ==========
 
-app.get('/tweets/intermediate', (req, res) =>
+app.get('/tweets/count', (req, res) =>
 {
     // * count tweets with likes >= 20
     Tweet.countDocuments({ likes: { $gte: 20 } })
-        .then((count) => res.send(count))
+        // ? wrap count in object so browser interprets to JSON
+        // ? as number, interprets as status code
+        .then((count) => res.send({ count }))
         .catch((err) => res.send(err))
 })
 
@@ -193,12 +202,19 @@ app.get('/tweets/advanced', (req, res) =>
 {
     // * using advanced query
     // ? -_id excludes _id field
+    // ? instructors suggested "-" sorts in descending order, but _id does not show up in returned data
     Tweet.find({ likes: { $gte: 20 } }, 'title -_id')
         .limit(2)
         .sort('title')
         .exec()
         .then((tweets) => res.send(tweets))
         .catch((err) => res.send(err))
+})
+
+// * ========== Fallback ==========
+app.get('*', (req, res) =>
+{
+    res.status(404).send({ message: 'Uh oh. You\'ve strayed from the path.' })
 })
 
 app.listen(PORT, () =>
