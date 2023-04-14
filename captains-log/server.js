@@ -30,7 +30,14 @@ app.get('/', (req, res) =>
  */
 app.get('/logs', (req, res) =>
 {
-    res.send('LOGS')
+    Log.find((err, foundLogs) =>
+    {
+        if (err || !foundLogs)
+        {
+            return res.status(404).redirect('/404')
+        }
+        return res.render('logs/Index', { logs: foundLogs })
+    })
 })
 
 /**
