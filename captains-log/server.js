@@ -48,7 +48,16 @@ app.post('/logs', (req, res) =>
 {
     req.body.shipIsBroken = req.body.shipIsBroken === 'on' ? true : false
 
-    res.send(req.body)
+    Log.create(req.body)
+        .then((log) =>
+        {
+            if (err || !log)
+            {
+                return res.status(404).redirect('/404')
+            }
+
+            res.redirect('/logs')
+        })
 })
 
 /**
