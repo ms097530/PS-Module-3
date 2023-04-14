@@ -23,6 +23,9 @@ function New({ title })
                     </div>
                     <input type="submit" value="Create New Fruit" />
                 </form>
+                <div>
+                    <a href="/fruits">Go Home</a>
+                </div>
             </div>
         </DefaultLayout>
     )
