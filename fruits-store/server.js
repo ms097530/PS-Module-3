@@ -44,9 +44,13 @@ app.get('/', (req, res) =>
 app.get('/fruits', (req, res) =>
 {
     // * Can use "find" method multiple ways
-    Fruit.find((error, allFruits) =>
+    Fruit.find((err, allFruits) =>
     {
-        res.render('fruits/Index', { fruits: allFruits })
+        if (err || !allFruits)
+        {
+            return res.redirect('/404')
+        }
+        res.render('fruits/Index', { fruits: allFruits, title: 'Fruits Home' })
     })
     // Fruit.find({}).then(val =>
     // {
@@ -59,7 +63,7 @@ app.get('/fruits', (req, res) =>
  */
 app.get('/fruits/new', (req, res) =>
 {
-    res.render('/fruits/New')
+    res.render('fruits/New', { title: 'Add a fruit' })
 })
 
 /**
@@ -80,6 +84,10 @@ app.post('fruits', async (req, res) =>
 
     Fruit.create(req.body, (err, createdFruit) =>
     {
+        if (err || !createdFruit)
+        {
+            return res.redirect('/404')
+        }
         res.redirect('/fruits')
     })
 })
@@ -93,7 +101,11 @@ app.get('/fruits/:id', (req, res) =>
 
     Fruit.findById(id, (err, foundFruit) =>
     {
-        res.render('fruits/Show', { fruit: foundFruit })
+        if (err || !foundFruit)
+        {
+            return res.redirect('/404')
+        }
+        res.render('fruits/Show', { fruit: foundFruit, title: foundFruit.name })
     })
 })
 

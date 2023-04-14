@@ -1,4 +1,5 @@
 const React = require('react')
+const DefaultLayout = require('../layout/Default')
 
 function Show(props)
 {
@@ -27,28 +28,26 @@ function Show(props)
         )
 
     return (
-        <div>
-
-            <h1>Show Page</h1>
-
+        <DefaultLayout title={props.title}>
             <div>
-                {output}
-            </div>
-
-            <div>
-                <p>{count}</p>
-                <button onClick={handleClick}>+</button>
+                <h1>Show Page</h1>
                 <div>
-                    <a href="/fruits">
-                        Back to fruits
-                    </a>
+                    {output}
                 </div>
                 <div>
-                    <a href="/">Go Home</a>
+                    <p>{count}</p>
+                    <button onClick={handleClick}>+</button>
+                    <div>
+                        <a href="/fruits">
+                            Back to fruits
+                        </a>
+                    </div>
+                    <div>
+                        <a href="/">Go Home</a>
+                    </div>
                 </div>
             </div>
-
-        </div>
+        </DefaultLayout>
     )
 }
 

@@ -1,9 +1,11 @@
 const React = require('react')
+const DefaultLayout = require('../layout/Default')
 
-function Index({ fruits })
+function Index({ fruits, title })
 {
+    // console.log(title)
     return (
-        <>
+        <DefaultLayout title={title}>
             <nav>
                 <a href="/fruits/new">Create a new fruit</a>
             </nav>
@@ -29,7 +31,7 @@ function Index({ fruits })
                     })
                 }
             </div>
-        </>
+        </DefaultLayout>
     )
 }
 
