@@ -147,7 +147,7 @@ app.put('/fruits/:id', (req, res) =>
     // * NOTE: first argument: id to match with
     // *      second argument: what to use to update match
     // *       third argument: callback function
-    Fruit.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, updatedFruit) =>
+    Fruit.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true }, (err, updatedFruit) =>
     {
         if (err || !updatedFruit)
         {
@@ -180,7 +180,7 @@ app.delete('/fruits/:id', (req, res) =>
 // fallback route
 app.get('*', (req, res) =>
 {
-    res.status(404).send('<h1>Not sure how you got here. Go on, git!</h1>')
+    res.status(404).send('<h1>Not sure how you got here. Go on, git!</h1><a href="/fruits">Go Home</a>')
 })
 
 app.listen(PORT, () =>

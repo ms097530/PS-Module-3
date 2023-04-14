@@ -2,8 +2,8 @@ const mongoose = require('mongoose')
 
 // Mongoose Fruit Schema (Blueprint)
 const fruitSchema = new mongoose.Schema({
-    name: { type: String, required: true },
-    color: { type: String, required: true },
+    name: { type: String, required: true, minlength: 1 },
+    color: { type: String, required: true, minlength: 1 },
     readyToEat: Boolean
 })
 
