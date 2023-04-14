@@ -1,37 +1,43 @@
 const React = require('react')
 const DefaultLayout = require('../layout/Default')
 
-function New({ title })
+
+module.exports = function Edit({ fruit, title })
 {
     return (
         <DefaultLayout title={title}>
+
             <div>
 
-                <h2>New Fruit Page</h2>
+                <h2>Edit Page</h2>
 
                 {/* NOTE: action will be the route, method will be the HTTP verb */}
-                <form action="/fruits" method="POST">
+                <form action={`/fruits/${fruit._id}?_method=PUT`} method="post">
 
                     <div>
                         <label htmlFor="name">Name:</label>
                         <input type="text"
                             name="name"
-                            id="name" />
+                            id="name"
+                            defaultValue={fruit.name} />
                     </div>
                     <div>
                         <label htmlFor="color">Color:</label>
                         <input type="text"
                             name="color"
-                            id="color" />
+                            id="color"
+                            defaultValue={fruit.color} />
                     </div>
                     <div>
                         <label htmlFor="readyToEat">Is Ready to Eat:</label>
                         <input type="checkbox"
                             name="readyToEat"
-                            id="readyToEat" />
+                            id="readyToEat"
+                            defaultChecked={fruit.readyToEat ? 'on' : ''} />
                     </div>
 
-                    <input type="submit" value="Create New Fruit" />
+                    <input type="submit" value="Update" />
+
                 </form>
 
                 <div>
@@ -42,5 +48,3 @@ function New({ title })
         </DefaultLayout>
     )
 }
-
-module.exports = New

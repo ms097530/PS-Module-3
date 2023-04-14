@@ -1,5 +1,6 @@
 require('dotenv').config()
 const express = require('express')
+const methodOverride = require('method-override')
 const mongoose = require('mongoose')
 // Data
 const fruits = require('./models/fruits')
@@ -14,8 +15,7 @@ app.set('views', 'views')
 app.set('view engine', 'jsx')
 app.engine('jsx', require('jsx-view-engine').createEngine())
 
-
-
+// * Middleware
 app.use(express.urlencoded({ extended: false }))
 
 app.use((req, res, next) =>
@@ -23,6 +23,9 @@ app.use((req, res, next) =>
     console.log('I run for all routes')
     next()
 })
+
+// ? override with POST having ?_method=DELETE
+app.use(methodOverride('_method'))
 
 /**
  * *  URL               HTTP Verb   Action      Used For
@@ -41,7 +44,7 @@ app.get('/', (req, res) =>
 })
 
 /**
- * Index Route: return a list of fruits
+ * * Index Route: return a list of fruits
  */
 app.get('/fruits', (req, res) =>
 {
@@ -61,7 +64,7 @@ app.get('/fruits', (req, res) =>
 })
 
 /**
- * New Route: return form to create new fruit
+ * * New Route: return form to create new fruit
  */
 app.get('/fruits/new', (req, res) =>
 {
@@ -69,9 +72,9 @@ app.get('/fruits/new', (req, res) =>
 })
 
 /**
- * Create Route: add new fruit to data 
+ * * Create Route: add new fruit to data 
 */
-app.post('fruits', async (req, res) =>
+app.post('/fruits', async (req, res) =>
 {
     if (req.body.readyToEat === 'on')
     // value from checkbox will be 'on' or won't send any value
@@ -95,7 +98,7 @@ app.post('fruits', async (req, res) =>
 })
 
 /**
- * Show Route: returns a single fruit
+ * * Show Route: returns a single fruit
 */
 app.get('/fruits/:id', (req, res) =>
 {
@@ -108,6 +111,69 @@ app.get('/fruits/:id', (req, res) =>
             return res.redirect('/404')
         }
         res.render('fruits/Show', { fruit: foundFruit, title: foundFruit.name })
+    })
+})
+
+/**
+ * * Edit Routes: show form for editing and handle a put request
+*/
+app.get('/fruits/:id/edit', (req, res) =>
+{
+    Fruit.findById(req.params.id, (err, foundFruit) =>
+    {
+        if (err || !foundFruit)
+        {
+            return res.status(404).redirect('/404')
+        }
+        return res.render('fruits/Edit', { fruit: foundFruit, title: `Edit ${foundFruit.name}` })
+    })
+})
+
+app.put('/fruits/:id', (req, res) =>
+{
+    console.log(req.body)
+
+    if (req.body.readyToEat === 'on')
+    // value from checkbox will be 'on' or won't send any value
+    // we only care about true or false, so set data accordingly and add to fruits
+    {
+        req.body.readyToEat = true
+    }
+    else
+    {
+        req.body.readyToEat = false
+    }
+
+    // * NOTE: first argument: id to match with
+    // *      second argument: what to use to update match
+    // *       third argument: callback function
+    Fruit.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, updatedFruit) =>
+    {
+        if (err || !updatedFruit)
+        {
+            return res.status(404).redirect('/404')
+        }
+        // * shows unupdated value without {new: true} option
+        // console.log(updatedFruit)
+        return res.redirect(`/fruits/${updatedFruit._id}`)
+    })
+})
+
+
+/**
+ * * Delete Route: delete fruit with given id
+ */
+
+app.delete('/fruits/:id', (req, res) =>
+{
+    Fruit.findByIdAndDelete(req.params.id, (err, deletedFruit) =>
+    {
+        if (err || !deletedFruit)
+        {
+            return res.status(404).redirect('/404')
+        }
+        // maybe take removed fruit and place in ANOTHER DB to possibly recover
+        return res.redirect('/fruits')
     })
 })
 

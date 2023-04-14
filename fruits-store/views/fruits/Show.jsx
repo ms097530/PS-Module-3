@@ -18,10 +18,10 @@ function Show(props)
     }
 
     const output = props.fruit.message
-        ? <h2>{props.fruit.message}</h2>
+        ? <h3>{props.fruit.message}</h3>
         : (
             <>
-                <h2>{props.fruit.name}</h2>
+                <h3>{props.fruit.name}</h3>
                 <p>Color: {props.fruit.color}</p>
                 <p>Ready to eat: {props.fruit.readyToEat ? 'good to go' : 'not on your life'}</p>
             </>
@@ -30,7 +30,7 @@ function Show(props)
     return (
         <DefaultLayout title={props.title}>
             <div>
-                <h1>Show Page</h1>
+                <h2>Show Page</h2>
                 <div>
                     {output}
                 </div>

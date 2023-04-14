@@ -10,20 +10,27 @@ function Index({ fruits, title })
                 <a href="/fruits/new">Create a new fruit</a>
             </nav>
             <div>
-                <h1>Fruits</h1>
+                <h2>Fruits</h2>
                 <hr />
                 {
                     fruits.map((fruit, i) =>
                     {
                         return (
-                            <React.Fragment key={fruit._id
-                            }>
+                            <React.Fragment key={fruit._id}>
                                 <div>
-                                    <h2>
+                                    <h3>
                                         <a href={`/fruits/${fruit._id}`}>
                                             Check out {fruit.name}
                                         </a>
-                                    </h2>
+                                    </h3>
+                                    <a href={`/fruits/${fruit._id}/edit`}>Edit</a>
+                                    {/* does GET by default, or can use POST */}
+                                    {/* need special configuration to do other requests */}
+                                    <form action={`/fruits/${fruit._id}?_method=DELETE`}
+                                        method="POST">
+                                        <input type="submit"
+                                            value="DELETE" />
+                                    </form>
                                 </div>
                                 <hr />
                             </React.Fragment>
