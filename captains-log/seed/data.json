@@ -1,0 +1,12 @@
+[
+    { 
+        "title": "hello",
+        "entry": "My name is Bob Dob.",
+        "shipIsBroken": false
+    }, 
+    { 
+        "title": "goodbye",
+        "entry": "My name is Bob Dob.",
+        "shipIsBroken": true
+    }
+]
