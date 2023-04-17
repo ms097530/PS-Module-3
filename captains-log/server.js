@@ -68,6 +68,21 @@ app.post('/logs', (req, res) =>
 })
 
 /**
+ * * SHOW ROUTE
+ */
+app.get('/logs/:id', (req, res) =>
+{
+    Log.findById(req.params.id, (err, foundLog) =>
+    {
+        if (err || !foundLog)
+        {
+            return res.redirect('/404')
+        }
+        return res.render('logs/Show', { log: foundLog })
+    })
+})
+
+/**
  * * SEED ROUTE
  */
 app.get('/logs/seed', async (req, res) =>
@@ -84,7 +99,7 @@ app.get('/logs/seed', async (req, res) =>
 
 app.get('*', (req, res) =>
 {
-    res.send('FALLBACK ROUTE')
+    res.render('404')
 })
 
 

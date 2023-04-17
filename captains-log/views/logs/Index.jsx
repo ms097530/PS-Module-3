@@ -1,4 +1,5 @@
 const React = require('react')
+const DefaultLayout = require('../layout/Default')
 
 export default function Index({ logs })
 {
@@ -6,16 +7,20 @@ export default function Index({ logs })
         <h3>No logs found</h3>
         : logs.map((log) => (
             <React.Fragment key={log._id}>
-                <h2>{log.title}</h2>
+                <h2>
+                    <a href={`/logs/${log._id}`}>{log.title}</a>
+                </h2>
                 <h3>Status: {log.shipIsBroken ? 'Vessel compromised' : 'Operational'}</h3>
                 <hr />
             </React.Fragment>
         ))
     return (
-        <div>
-            <h2>Captain's Log Entries</h2>
-            <hr />
-            {logsDisplay}
-        </div>
+        <DefaultLayout title="Captain's Logs">
+            <div>
+                <h2>Captain's Log Entries</h2>
+                <hr />
+                {logsDisplay}
+            </div>
+        </DefaultLayout>
     )
 }
