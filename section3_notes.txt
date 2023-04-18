@@ -1,0 +1,3 @@
+- 'public' directory is for static files
+  - meaning unchanging (i.e. static CSS or JS, images, ...)
+  - dynamic files change depending on data

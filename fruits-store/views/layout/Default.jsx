@@ -8,6 +8,7 @@ module.exports = function DefaultLayout({ title, children })
                 <title>
                     {title}
                 </title>
+                <link rel="stylesheet" href="/css/app.css" />
             </head>
             <body>
                 <h1>{title}</h1>
