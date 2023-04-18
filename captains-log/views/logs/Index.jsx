@@ -1,5 +1,5 @@
-const React = require('react')
-const DefaultLayout = require('../layout/Default')
+import React from "react"
+import DefaultLayout from "../layout/Default"
 
 export default function Index({ logs })
 {
@@ -11,6 +11,11 @@ export default function Index({ logs })
                     <a href={`/logs/${log._id}`}>{log.title}</a>
                 </h2>
                 <h3>Status: {log.shipIsBroken ? 'Vessel compromised' : 'Operational'}</h3>
+
+                <a href={`/logs/${log._id}/edit`}>EDIT</a>
+                <form action={`/logs/${log._id}?_method=DELETE`} method="post">
+                    <input type="submit" value="DELETE" />
+                </form>
                 <hr />
             </React.Fragment>
         ))

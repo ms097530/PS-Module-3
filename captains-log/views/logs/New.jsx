@@ -1,5 +1,5 @@
-const React = require('react')
-const DefaultLayout = require('../layout/Default')
+import React from "react"
+import DefaultLayout from "../layout/Default"
 
 module.exports = function New()
 {
