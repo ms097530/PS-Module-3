@@ -1,3 +1,19 @@
 - 'public' directory is for static files
   - meaning unchanging (i.e. static CSS or JS, images, ...)
   - dynamic files change depending on data
+
+  - two possible MERN project structures
+    1. two separate projects, one for frontend, one for backend
+      - pros
+        - better for when backend services multiple frontend projects (web, native mobile, desktop)
+      - cons
+        - must manage two projects and repos
+        - must deploy two separate projects
+        - React project will require code and/or configuration to access correct backend during development (localhost) and production (could be anywhere)
+        - must implement CORS
+    2. integrated frontend and backend
+      - pros
+        - single integrated project
+        - none of the above cons
+      - cons
+        - not the best structure for reusing the same backend to service multiple frontend projects (e.g. web/mobile/desktop)
