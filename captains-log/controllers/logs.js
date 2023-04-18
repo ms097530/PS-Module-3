@@ -1,10 +1,12 @@
 const router = require('express').Router()
+const fs = require('fs').promises
+const Log = require('../models/Log')
 
 
 /**
  * * INDEX ROUTE
  */
-router.get('/logs', (req, res) =>
+router.get('/', (req, res) =>
 {
     Log.find((err, foundLogs) =>
     {
@@ -19,7 +21,7 @@ router.get('/logs', (req, res) =>
 /**
  * * NEW FORM ROUTE
  */
-router.get('/logs/new', (req, res) =>
+router.get('/new', (req, res) =>
 {
     res.render('logs/New')
 })
@@ -27,26 +29,26 @@ router.get('/logs/new', (req, res) =>
 /**
  * * CREATE ROUTE
  */
-router.post('/logs', (req, res) =>
+router.post('/', (req, res) =>
 {
     req.body.shipIsBroken = req.body.shipIsBroken === 'on' ? true : false
 
-    Log.create(req.body)
-        .then((log) =>
+    Log.create(req.body, (err, createdLog) =>
+    {
+        if (err || !createdLog)
         {
-            if (err || !log)
-            {
-                return res.status(404).redirect('/404')
-            }
+            return res.status(404).redirect('/404')
+        }
 
-            res.redirect('/logs')
-        })
+        return res.redirect('/logs')
+    })
+
 })
 
 /**
  * * SEED ROUTE
  */
-router.get('/logs/seed', async (req, res) =>
+router.get('/seed', async (req, res) =>
 {
     // using readFile from fs promises
     const buf = await fs.readFile('./seed/data.json')
@@ -61,7 +63,7 @@ router.get('/logs/seed', async (req, res) =>
 /**
  * * EDIT FORM ROUTE
  */
-router.get('/logs/:id/edit', (req, res) =>
+router.get('/:id/edit', (req, res) =>
 {
     Log.findById(req.params.id, (err, foundLog) =>
     {
@@ -76,7 +78,7 @@ router.get('/logs/:id/edit', (req, res) =>
 /**
  * * UPDATE ROUTE
  */
-router.put('/logs/:id', (req, res) =>
+router.put('/:id', (req, res) =>
 {
     req.body.shipIsBroken = req.body.shipIsBroken === 'on' ? true : false
 
@@ -93,7 +95,7 @@ router.put('/logs/:id', (req, res) =>
 /**
  * * SHOW ROUTE
  */
-router.get('/logs/:id', (req, res) =>
+router.get('/:id', (req, res) =>
 {
     Log.findById(req.params.id, (err, foundLog) =>
     {
@@ -108,7 +110,7 @@ router.get('/logs/:id', (req, res) =>
 /**
  * * DELETE ROUTE
  */
-router.delete('/logs/:id', (req, res) =>
+router.delete('/:id', (req, res) =>
 {
     Log.findByIdAndDelete(req.params.id, { new: true }, (err, deletedLog) =>
     {
@@ -120,3 +122,5 @@ router.delete('/logs/:id', (req, res) =>
         return res.redirect('/logs')
     })
 })
+
+module.exports = router

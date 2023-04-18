@@ -1,10 +1,10 @@
 require('dotenv').config()
 const express = require('express')
 const methodOverride = require('method-override')
-const fs = require('fs').promises
+const logRoutes = require('./controllers/logs')
 
 const connectToDB = require('./config/db')
-const Log = require('./models/Log')
+
 
 const PORT = 3000
 const app = express()
@@ -25,7 +25,7 @@ app.get('/', (req, res) =>
     res.redirect('/logs')
 })
 
-
+app.use('/logs', logRoutes)
 
 app.get('*', (req, res) =>
 {

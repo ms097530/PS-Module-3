@@ -3,7 +3,7 @@ import DefaultLayout from '../layout/Default'
 
 export default function Show({ log })
 {
-    console.log(log)
+    // console.log(log)
     return (
         <DefaultLayout title={'Captain\'s Log - ' + log.title}>
             <div>

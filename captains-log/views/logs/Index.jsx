@@ -23,6 +23,7 @@ export default function Index({ logs })
         <DefaultLayout title="Captain's Logs">
             <div>
                 <h2>Captain's Log Entries</h2>
+                <a href="/logs/new">Add new log</a>
                 <hr />
                 {logsDisplay}
             </div>
