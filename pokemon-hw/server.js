@@ -37,9 +37,14 @@ app.get('/pokemon/new', (req, res) =>
 
 app.post('/pokemon', (req, res) =>
 {
-    console.log(req.body)
+    // sample image url
+    // ! name in url needs to be lowercase or else 404
+    // https://img.pokemondb.net/artwork/avif/bulbasaur.avif
+
+    // console.log(req.body)
     const { dexId: pokedexId, name, types } = req.body
-    const pokemon = { pokedexId, name, types }
+    const pokemon = { pokedexId, name, types, imgUrl: `https://img.pokemondb.net/artwork/avif/${name.toLowerCase()}.avif` }
+
     Pokemon.create(pokemon, (err, createdPokemon) =>
     {
         if (err || !createdPokemon)
