@@ -17,3 +17,8 @@
         - none of the above cons
       - cons
         - not the best structure for reusing the same backend to service multiple frontend projects (e.g. web/mobile/desktop)
+
+- Types of modules
+  - UTILITY - hold general purpose functions, reusable in multiple projects
+  - SERVICE - organize app specific logic (i.e. functions for signing up or logging in a user); often use and depend on API modules
+  - API modules - abstracting logic that makes requests (such as AJAX calls); abstraction makes it easier to refactor code to use different techniques, libraries, etc. (i.e. using fetch, but refactoring to axios would be easy thanks to API modules)
